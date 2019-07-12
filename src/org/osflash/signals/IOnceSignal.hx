@@ -1,6 +1,7 @@
 package org.osflash.signals;
 
 import haxe.Constraints.Function;
+
 interface IOnceSignal {
 
     /** An optional array of classes defining the types of parameters sent to listeners. */

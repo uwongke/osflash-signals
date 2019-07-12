@@ -1,7 +1,5 @@
 package org.osflash.signals;
 
-import openfl.errors.Error;
-import openfl.errors.ArgumentError;
 import haxe.Constraints.Function;
 
 /** The Slot class represents a signal slot. */
@@ -24,13 +22,13 @@ class Slot implements ISlot {
     }
 
     @:isVar public var listener(get, set) : Function;
-    private function get_listener() : Function {
+    public function get_listener() : Function {
         return _listener;
     }
 
-    private function set_listener(value : Function) : Function {
+    public function set_listener(value : Function) : Function {
         if (null == value) {
-            throw new ArgumentError(
+            throw new js.lib.Error(
             "Given listener is null.\nDid you want to set enabled to false instead?");
         }
 
@@ -40,23 +38,23 @@ class Slot implements ISlot {
     }
 
     @:isVar public var once(get, never) : Bool;
-    private function get_once() : Bool { return _once; }
+    public function get_once() : Bool { return _once; }
 
     public var priority(get, never) : Int;
-    private function get_priority() : Int { return _priority; }
+    public function get_priority() : Int { return _priority; }
 
     public var enabled(get, set) : Bool;
-    private function get_enabled() : Bool { return _enabled; }
+    public function get_enabled() : Bool { return _enabled; }
 
-    private function set_enabled(value : Bool) : Bool {
+    public function set_enabled(value : Bool) : Bool {
         _enabled = value;
         return value;
     }
 
     public var params(get, set) : Array<Dynamic>;
-    private function get_params() : Array<Dynamic> { return _params;}
+    public function get_params() : Array<Dynamic> { return _params;}
 
-    private function set_params(value : Array<Dynamic>) : Array<Dynamic> {
+    public function set_params(value : Array<Dynamic>) : Array<Dynamic> {
         _params = value;
         return value;
     }
@@ -68,7 +66,7 @@ class Slot implements ISlot {
         if (_once) {
             remove();
         }
-        if (_params != null && _params.length) {
+        if (_params != null && _params.length !=0) {
             Reflect.callMethod(null, _listener, _params);
             return;
         }
@@ -82,7 +80,7 @@ class Slot implements ISlot {
         if (_once) {
             remove();
         }
-        if (_params != null && _params.length) {
+        if (_params != null && _params.length !=0) {
             Reflect.callMethod(null, _listener, [value].concat(_params));
             return;
         }
@@ -99,7 +97,7 @@ class Slot implements ISlot {
 
         /** If we have parameters, add them to the valueObject
 			Note: This could be expensive if we're after the fastest dispatch possible. */
-        if (_params != null && _params.length) {
+        if (_params != null && _params.length !=0) {
             valueObjects = valueObjects.concat(_params);
         }
 
@@ -133,11 +131,11 @@ class Slot implements ISlot {
 
     private function verifyListener(listener : Function) : Void {
         if (null == listener) {
-            throw new ArgumentError("Given listener is null.");
+            throw new js.lib.Error("Given listener is null.");
         }
 
         if (null == _signal) {
-            throw new Error("Internal signal reference has not been set yet.");
+            throw new js.lib.Error("Internal signal reference has not been set yet.");
         }
     }
 

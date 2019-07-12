@@ -1,6 +1,5 @@
 package org.osflash.signals;
 
-import openfl.utils.Object;
 import haxe.Constraints.Function;
 
 /** The ISlot interface defines the basic properties of a
@@ -10,7 +9,7 @@ interface ISlot {
     /** The listener associated with this slot. */
     @:isVar public var listener(get, set): Function;
     public function get_listener(): Function;
-    public function set_area(value: Function): Function;
+    public function set_listener(value: Function): Function;
 
     /** Allows the ISlot to inject parameters when dispatching. The params will be at
 		the tail of the arguments and the ISignal arguments will be at the head. */
@@ -35,7 +34,7 @@ interface ISlot {
     function execute0():Void;
 
     /** Dispatches one argument to a listener. */
-    function execute1(value:Object):Void;
+    function execute1(value:Dynamic):Void;
 
     /** Executes a listener */
     function execute(valueObjects:Array<Dynamic>):Void;
