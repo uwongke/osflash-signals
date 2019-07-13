@@ -10,12 +10,12 @@ class TestRunner {
 
     public function new() {
         /** Add Test Cases here.... */
-        r.add(new GenericEventTest());
-        r.add(new SlotListTest());
-        r.add(new SlotTest());
-        r.add(new SignalTest());
+        //r.add(new GenericEventTest());
+        //r.add(new SlotListTest());
+        //r.add(new SlotTest());
+        //r.add(new SignalTest());
 
         /** Run the tests*/
-        r.run();
+        //r.run();
     }
 }
