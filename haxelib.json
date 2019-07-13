@@ -1,0 +1,14 @@
+{
+  "name": "osflash-",
+  "url" : "https://github.com/WolfieWerewolf/osflash-signals",
+  "license": "MIT",
+  "tags": [],
+  "description": "poptropica osflash-signals package",
+  "version": "1.0.0",
+  "classPath": "src/",
+  "releasenote": "Just the core functionality.",
+  "contributors": ["Wolfie"],
+  "dependencies": {
+    "hx3compat": "1.0.3"
+  }
+}
