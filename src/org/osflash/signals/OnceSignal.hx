@@ -21,9 +21,9 @@ class OnceSignal implements IOnceSignal {
         return _valueClasses;
     }
 
-    public function set_valueClasses(value : Array<Dynamic>) : Array<Dynamic>
-        /** Clone so the Array cannot be affected from outside. */{
+    public function set_valueClasses(value : Array<Dynamic>) : Array<Dynamic> {
 
+        /** Clone so the Array cannot be affected from outside. */
         _valueClasses = (value != null) ? value.copy() : [];
         var i : Int = _valueClasses.length;
         if(value.length !=0){

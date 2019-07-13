@@ -1,7 +1,7 @@
 package ;
 
+import test.org.osflash.signals.SlotTest;
 import test.org.osflash.signals.SlotListTest;
-import test.org.osflash.signals.SlotTestBase;
 import test.org.osflash.signals.events.GenericEventTest;
 
 class TestRunner {
@@ -11,6 +11,9 @@ class TestRunner {
         /** Add Test Cases here.... */
         r.add(new GenericEventTest());
         r.add(new SlotListTest());
+        r.add(new SlotTest());
+
+
         /** Run the tests*/
         r.run();
     }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+    <meta title="osflash-signals" package="org" version="1.0.0" company="Wolfie" />
+    <app main="Main" path="webRoot" file="URLLoader" />
+
+    <source path="src" />
+
+    <haxelib name="openfl" />
+    <haxelib name="hx3compat" />
+</project>

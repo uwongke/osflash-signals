@@ -1,8 +1,10 @@
 package test.org.osflash.signals;
 
+import org.osflash.signals.Signal;
+
 class SlotTest extends SlotTestBase {
     override public function setup() {
-        //signal = new Signal();
+        signal = new Signal();
     }
 
     override public function tearDown() {

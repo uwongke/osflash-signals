@@ -51,12 +51,20 @@ class Slot implements ISlot {
         return value;
     }
 
-    public var params(get, set) : Array<Dynamic>;
-    public function get_params() : Array<Dynamic> { return _params;}
+    @:isVar public var params(get, set) : Array<Dynamic>;
+    public function get_params() : Array<Dynamic> {
+        return _params;
+    }
 
     public function set_params(value : Array<Dynamic>) : Array<Dynamic> {
-        _params = value;
-        return value;
+        //trace(value);
+        if(value.length > 1){
+            _params = new Array<Dynamic>();
+            for (i in 0...value.length) {
+                _params.push(value[i]);
+            }
+        }
+        return _params = value;
     }
 
     public function execute0() : Void {
@@ -138,5 +146,10 @@ class Slot implements ISlot {
             throw new js.lib.Error("Internal signal reference has not been set yet.");
         }
     }
-
 }
+
+//_params = new Array<Dynamic>();
+//        var empty:Null<Dynamic> = null;
+//        var newArray:Array<Dynamic> = new Array<Dynamic>();
+//
+//        for (i in 0...20) { newArray.push(empty); }
