@@ -1,4 +1,4 @@
-package ;
+package org;
 
 import test.org.osflash.signals.SlotTest;
 import test.org.osflash.signals.SignalTest;
