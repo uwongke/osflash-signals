@@ -1,5 +1,6 @@
 package test.org.osflash.signals;
 
+import org.osflash.signals.events.GenericEvent;
 import org.osflash.signals.ISlot;
 import haxe.Constraints.Function;
 import org.osflash.signals.ISignal;
@@ -7,6 +8,8 @@ import org.osflash.signals.ISignal;
 class SignalTestBase extends haxe.unit.TestCase {
 
     private var signal : ISignal;
+
+    public var e : GenericEvent = new GenericEvent();
 
     public function destroySignal() : Void {
         signal.removeAll();
@@ -16,6 +19,14 @@ class SignalTestBase extends haxe.unit.TestCase {
     override public function setup() {}
     override public function tearDown() {
         destroySignal();
+    }
+
+    private function testCheckGenericEvent() : Void {
+        /** event.signal is not set by Signal */
+        assertTrue(e.signal == null);
+
+        /** event.target is not set by Signal */
+        assertTrue(e.target == null);
     }
 
     public function test_numListeners_is_0_after_creation(): Void {

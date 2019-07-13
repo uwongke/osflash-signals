@@ -21,23 +21,20 @@ class OnceSignal implements IOnceSignal {
         return _valueClasses;
     }
 
+    /** This setter has been completely refactored from the original SVN code @ Wolfie */
     public function set_valueClasses(value : Array<Dynamic>) : Array<Dynamic> {
-        /** Clone so the Array cannot be affected from outside. */
-        _valueClasses = (value != null) ? value.copy() : [];
+        _valueClasses = new Array<Dynamic>();
 
-        var i : Int = _valueClasses.length;
-        if(value.length !=0){
-            while(i >= 0){
-                if (!(Std.is(_valueClasses[i], Class))){
-                    throw new js.lib.Error("Invalid valueClasses argument: " +
-                    "item at index " + i + " should be a Class but was:<" +
-                    _valueClasses[i] + ">." + Type.getClassName(_valueClasses[i]));
+        var classes: Array<Dynamic> = value[0];
+        for (i in 0..._valueClasses.length) {
+            if(classes[i] != null) {
+                if(Std.is(classes[i], Class)){
+                    _valueClasses.push(classes[i]);
                 }
-                i--;
             }
         }
 
-        return value;
+        return _valueClasses;
     }
 
     @:isVar public var numListeners(get, never) : Int;
