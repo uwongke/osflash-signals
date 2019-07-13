@@ -1,7 +1,7 @@
 package ;
 
-import test.org.osflash.signals.SignalTest;
 import test.org.osflash.signals.SlotTest;
+import test.org.osflash.signals.SignalTest;
 import test.org.osflash.signals.SlotListTest;
 import test.org.osflash.signals.events.GenericEventTest;
 

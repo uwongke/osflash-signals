@@ -9,9 +9,7 @@ class SlotTest extends SlotTestBase {
         signal = new Signal();
     }
 
-    override public function tearDown() {
-
-    }
+    override public function tearDown() {}
 
     public function test_add_listener_pause_then_resume_on_slot_should_dispatch() : Void {
         var slot : ISlot = signal.add(testCheckGenericEvent);
