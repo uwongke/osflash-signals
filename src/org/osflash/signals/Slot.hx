@@ -147,9 +147,3 @@ class Slot implements ISlot {
         }
     }
 }
-
-//_params = new Array<Dynamic>();
-//        var empty:Null<Dynamic> = null;
-//        var newArray:Array<Dynamic> = new Array<Dynamic>();
-//
-//        for (i in 0...20) { newArray.push(empty); }

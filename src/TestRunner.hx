@@ -9,8 +9,8 @@ class TestRunner {
 
     public function new() {
         /** Add Test Cases here.... */
-        r.add(new GenericEventTest());
-        r.add(new SlotListTest());
+        //r.add(new GenericEventTest());
+        //r.add(new SlotListTest());
         r.add(new SlotTest());
 
 

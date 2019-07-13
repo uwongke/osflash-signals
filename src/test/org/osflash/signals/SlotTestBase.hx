@@ -215,7 +215,6 @@ class SlotTestBase extends haxe.unit.TestCase {
             var slot : ISlot = signal.add(newEmptyHandler());
             slot.listener = null;
         } catch(e: js.lib.Error){
-            //TODO@Wolfie Check if ArgumentError and if true assert True.
             assertTrue(true);
         }
     }
@@ -351,126 +350,91 @@ class SlotTestBase extends haxe.unit.TestCase {
     }
 
     public function test_slot_params_with_one_param_should_be_sent_through_to_listener() : Void {
-        //var listener : Function = function(args: Dynamic) : Void {
-            //assertTrue(args !=null);
+        var slot: ISlot = signal.add((args: Dynamic)-> {
+            assertTrue(args !=null);
+            assertTrue(Std.is(args[0], Int));
+            assertEquals(args[0], 1234);
+        });
+        slot.params = new Array<Dynamic>();
+        slot.params= [[1234]];
 
-            //trace(args);
-            //assertTrue(Std.is(args, Int));
-            //assertEquals(args, 1234);
-        //}
-
-        //var slot : ISlot = signal.add(listener);
-        //slot.params = new Array<Dynamic>();
-        //slot.params.push(1234);
-
-        //signal.dispatch(new Array<Dynamic>());
+        signal.dispatch(new Array<Dynamic>());
         assertTrue(true);
     }
 
     public function test_slot_params_with_multiple_params_should_be_sent_through_to_listener() : Void {
-        //var listener : Function = function(args : Array<Dynamic>) : Void {
-        //    assertTrue(args !=null);
+        var slotParams: Array<Dynamic> = [[12345, "text", new TestClass()]];
 
-        //    trace("--------------------");
-        //    trace(args);
+        var slot: ISlot = signal.add((args : Array<Dynamic>)-> {
+            assertTrue(args !=null);
+            assertTrue(Std.is(args[0], Int));
+            assertEquals(args[0], 12345);
+            assertTrue(Std.is(args[1], String));
+            assertEquals(args[1], "text");
 
-            //assertTrue(Std.is(args[0], Int));
-            //assertEquals(args[0], 12345);
-
-            //assertTrue(Std.is(args[1], String));
-            //assertEquals(args[1], "text");
-
-            //assertTrue(Std.is(args[2], Sprite));
-            //assertEquals(args[2], slot.params[2]);
-        //}
-
-        var slot : ISlot = signal.add(function(args : Array<Dynamic>) : Void {
-            //assertTrue(args !=null);
-
-            trace("--------------------");
-            trace(args);
+            var sp: Array<Dynamic> = slotParams[0];
+            assertTrue(Std.is(sp[2], TestClass));
             assertTrue(true);
         });
-        slot.params = [12345, "text", 100.0];
 
-        //var arr = new Array<Dynamic>();
-        //arr.push(0);
-        //arr.push(1);
-        //signal.dispatch(arr);
+        slot.params = slotParams;
         signal.dispatch(new Array<Dynamic>());
         assertTrue(true);
-        //Browser.window.setTimeout(function(){
-
-        //}, 2000);
-
-        //TODO@Wolfie we have some chicken and egg going on here...
     }
-//
-//    public function test_slot_params_should_not_effect_other_slots() : Void {
-//        var listener0 : Function = function(e : js.html.Event) : Void {
-//            assertTrue(e !=null);
-//
-//            //assertEquals(arguments.length, 1);
-//        }
-//
-//        signal.add(listener0);
-//
-//        var listener1 : Function = function(e : js.html.Event) : Void {
-//            assertTrue(e !=null);
-//
-//            //assertEquals(arguments.length, 2);
-//            //assertEquals(arguments[1], 123456);
-//        }
-//
-//        var slot : ISlot = signal.add(listener1);
-//        slot.params = [123456];
-//
-//        signal.dispatch(new Array<Dynamic>());
-//    }
-//
-//    public function test_verify_chaining_of_slot_params() : Void {
-//        var listener : Function = function(e : js.html.Event, args : Array<Dynamic> = null) : Void {
-//            assertTrue(e !=null);
-//
-//            assertEquals(args.length, 1);
-//            assertEquals(args[0], 1234567);
-//        }
-//
-//        signal.add(listener).params = [1234567];
-//        signal.dispatch(new Array<Dynamic>());
-//    }
-//
-//    public function test_verify_chaining_and_concat_of_slot_params() : Void {
-//        var listener : Function = function(e : js.html.Event, args : Array<Dynamic> = null) : Void {
-//            assertTrue(e !=null);
-//
-//            assertEquals(args.length, 2);
-//            assertEquals(args[0], 12345678);
-//            assertEquals(args[1], "text");
-//        }
-//
-//        //signal.add(listener).params = [12345678].concat(["text"]);
-//
-//        signal.dispatch(new Array<Dynamic>());
-//    }
-//
-//    public function test_verify_chaining_and_pushing_on_to_slot_params() : Void {
-//        var listener : Function = function(e : js.html.Event, args : Array<Dynamic> = null) : Void {
-//            assertTrue(e !=null);
-//
-//            assertEquals(args.length, 2);
-//            assertEquals(args[0], 123456789);
-//            assertEquals(args[1], "text");
-//        }
-//
-//        /** This is ugly, but I put money on somebody will attempt to do this! */
-//        var slots : ISlot;
-//        //(slots = signal.add(listener)).params = [123456789];
-//        //slots.params.push("text");
-//
-//        signal.dispatch(new Array<Dynamic>());
-//    }
-//
+
+    public function test_slot_params_should_not_effect_other_slots() : Void {
+        signal.add((args : Array<Dynamic>)->{
+            assertFalse(args !=null);
+        });
+
+        var slot: ISlot = signal.add((args : Array<Dynamic>)->{
+            assertTrue(args !=null);
+            assertEquals(args.length, 1);
+            assertEquals(args[0], 123456);
+        });
+        slot.params = [[123456]];
+
+        signal.dispatch(new Array<Dynamic>());
+        assertTrue(true);
+    }
+
+    public function test_verify_chaining_of_slot_params() : Void {
+        signal.add((args : Array<Dynamic>)->{
+            assertTrue(args !=null);
+            assertEquals(args.length, 1);
+            assertEquals(args[0], 1234567);
+        }).params = [[1234567]];
+
+        signal.dispatch(new Array<Dynamic>());
+        assertTrue(true);
+    }
+
+    public function test_verify_chaining_and_concat_of_slot_params() : Void {
+        signal.add((args : Array<Dynamic>)->{
+            assertTrue(args !=null);
+            assertEquals(args.length, 2);
+        }).params = [[12345678].concat(cast ["text"])];
+
+        signal.dispatch(new Array<Dynamic>());
+        assertTrue(true);
+    }
+
+    public function test_verify_chaining_and_pushing_on_to_slot_params() : Void {
+        /** This is ugly, but I put money on somebody will attempt to do this! (original author comment) */
+        var slots : ISlot;
+        (slots = signal.add((args : Array<Dynamic>)->{
+            assertTrue(args !=null);
+            assertEquals(cast args.length, 2);
+            assertEquals(args[0], 123456789);
+            assertEquals(args[1], "text");
+        })).params = [[123456789]];
+        var args: Array<Dynamic> = slots.params[0];
+        args.push("text");
+
+        signal.dispatch(new Array<Dynamic>());
+        assertTrue(true);
+    }
+
     private static function newEmptyHandler() : Function {
         return function(e : Dynamic = null, args : Array<Dynamic> = null) : Void {};
     }
@@ -479,3 +443,6 @@ class SlotTestBase extends haxe.unit.TestCase {
         throw new js.lib.Error("This function should not have been called.");
     }
 }
+
+/** Discrete test Class */
+class TestClass { public function new(){} }
