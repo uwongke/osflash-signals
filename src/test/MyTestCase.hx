@@ -11,10 +11,4 @@ class MyTestCase extends haxe.unit.TestCase {
     override public function tearDown() {
 
     }
-
-    //public function testFirstCase() {
-
-    //}
-
-    //...... add more cases
 }

@@ -9,15 +9,13 @@ import org.osflash.signals.ISignal;
 class SlotTestBase extends haxe.unit.TestCase {
 
     public var signal : ISignal;
-
     public var e : GenericEvent = new GenericEvent();
 
-    override public function setup() {
-    }
+    override public function setup() {}
 
     override public function tearDown() {
-        //signal.removeAll();
-        //signal = null;
+        signal.removeAll();
+        signal = null;
     }
 
     private function testCheckGenericEvent() : Void {
@@ -443,6 +441,3 @@ class SlotTestBase extends haxe.unit.TestCase {
         throw new js.lib.Error("This function should not have been called.");
     }
 }
-
-/** Discrete test Class */
-class TestClass { public function new(){} }
