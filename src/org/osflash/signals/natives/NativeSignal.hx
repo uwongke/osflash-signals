@@ -33,21 +33,21 @@ class NativeSignal implements INativeDispatcher {
 
     /** eventType Property */
     public var eventType(get, set) : String;
-    private function get_eventType() : String {
+    public function get_eventType() : String {
         return _eventType;
     }
-    private function set_eventType(value : String) : String {
+    public function set_eventType(value : String) : String {
         _eventType = value;
         return value;
     }
 
     /** eventClass Property */
     public var eventClass(get, set) : Class<Dynamic>;
-    private function get_eventClass() : Class<Dynamic> {
+    public function get_eventClass() : Class<Dynamic> {
         return _eventClass;
     }
 
-    private function set_eventClass(value : Class<Dynamic>) : Class<Dynamic> {
+    public function set_eventClass(value : Class<Dynamic>) : Class<Dynamic> {
         //_eventClass = value || Event;
         _eventClass = value != null ? value: Event;
         _valueClasses = [_eventClass];
@@ -74,11 +74,11 @@ class NativeSignal implements INativeDispatcher {
 
     /** target Property */
     public var target(get, set) : IEventDispatcher;
-    private function get_target() : IEventDispatcher {
+    public function get_target() : IEventDispatcher {
         return _target;
     }
 
-    private function set_target(value : IEventDispatcher) : IEventDispatcher {
+    public function set_target(value : IEventDispatcher) : IEventDispatcher {
         if (value == _target) {
             return value;
         }

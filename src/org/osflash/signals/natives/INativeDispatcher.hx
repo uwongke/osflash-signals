@@ -1,6 +1,6 @@
 package org.osflash.signals.natives;
 
-//import openfl.events.Event;
+import openfl.events.Event;
 import openfl.events.IEventDispatcher;
 
 /** Similar to IDispatcher but using strong types specific to Flash's native event system. */
@@ -20,5 +20,5 @@ interface INativeDispatcher extends IPrioritySignal {
     public function set_target(value: IEventDispatcher): IEventDispatcher;
 
     /** Dispatches an event to listeners. */
-    function dispatchEvent(event : js.html.Event) : Bool;
+    function dispatchEvent(event : Event) : Bool;
 }
