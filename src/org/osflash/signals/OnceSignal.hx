@@ -7,7 +7,7 @@ import haxe.Constraints.Function;
 class OnceSignal implements IOnceSignal {
 
     private var _valueClasses : Array<Dynamic>;  /** of Class */
-    private var slots : SlotList = SlotList.NIL;
+    private var slots : SlotList = new SlotList(null, null);
 
     /** Creates a Signal instance to dispatch value objects. */
     public function new(valueClasses : Array<Dynamic> = null){
