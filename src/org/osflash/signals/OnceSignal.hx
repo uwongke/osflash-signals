@@ -1,5 +1,6 @@
 package org.osflash.signals;
 
+import js.Browser;
 import haxe.Constraints.Function;
 
 /** Allows the valueClasses to be set in MXML */
@@ -7,7 +8,7 @@ import haxe.Constraints.Function;
 class OnceSignal implements IOnceSignal {
 
     private var _valueClasses : Array<Dynamic>;  /** of Class */
-    private var slots : SlotList = new SlotList(null, null);
+    private var slots : SlotList = SlotList.NIL;
 
     /** Creates a Signal instance to dispatch value objects. */
     public function new(valueClasses : Array<Dynamic> = null){
@@ -104,6 +105,9 @@ class OnceSignal implements IOnceSignal {
     }
 
     private function registrationPossible(listener : Function, once : Bool) : Bool{
+        if(slots == null){
+            slots = SlotList.NIL;
+        }
         if (!slots.nonEmpty){
             return true;
         }
