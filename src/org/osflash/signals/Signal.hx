@@ -19,6 +19,12 @@ class Signal extends OnceSignal implements ISignal {
             valueClasses = ((valueClasses.length == 1 && Std.is(valueClasses[0], Array))) ? valueClasses[0] : valueClasses;
         }
         super(valueClasses);
+
+        /** Warning! Hack! It should never happen but it does! I'm too lazy to
+            investigate it further so I've added... this ~ Michael */
+         if(this.slots == null) {
+            this.slots = SlotList.NIL;
+        }
     }
 
     public function add(listener : Function) : ISlot{
