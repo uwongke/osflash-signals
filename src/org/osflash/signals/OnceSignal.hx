@@ -63,6 +63,10 @@ class OnceSignal implements IOnceSignal {
 
     /** If valueClasses is empty, value objects are not type-checked. */
     public function dispatch(valueObjects : Array<Dynamic> = null) : Void{
+        if(valueObjects == null){
+            valueObjects = new Array<Dynamic>();
+        }
+
         var numValueClasses : Int = _valueClasses.length;
         var numValueObjects : Int = valueObjects.length;
 
