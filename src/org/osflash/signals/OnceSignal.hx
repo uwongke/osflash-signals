@@ -1,7 +1,7 @@
 package org.osflash.signals;
 
-import js.Browser;
 import haxe.Constraints.Function;
+import openfl.errors.Error;
 
 /** Allows the valueClasses to be set in MXML */
 @:meta(DefaultProperty(name="valueClasses"))
@@ -72,7 +72,7 @@ class OnceSignal implements IOnceSignal {
 
         /** Cannot dispatch fewer objects than declared classes. */
         if (numValueObjects < numValueClasses){
-            throw new js.lib.Error("Incorrect number of arguments. " +
+            throw new Error("Incorrect number of arguments. " +
             "Expected at least " + numValueClasses + " but received " +
             numValueObjects + ".");
         }
@@ -85,7 +85,7 @@ class OnceSignal implements IOnceSignal {
                 continue;
             }
 
-            throw new js.lib.Error("Value object <" + valueObjects[i] + "> is not an instance of <" + _valueClasses[i] + ">.");
+            throw new Error("Value object <" + valueObjects[i] + "> is not an instance of <" + _valueClasses[i] + ">.");
         }
 
         /** Broadcast to listeners. */
@@ -124,7 +124,7 @@ class OnceSignal implements IOnceSignal {
         /** If the listener was previously added, definitely don't add it again.
 		    But throw an exception if their once values differ. */
         if (existingSlot.once != once){
-            throw new js.lib.Error("You cannot addOnce() then add() the same listener without removing the relationship first.");
+            throw new Error("You cannot addOnce() then add() the same listener without removing the relationship first.");
         }
 
         return false;

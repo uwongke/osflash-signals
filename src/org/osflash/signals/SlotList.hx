@@ -2,6 +2,7 @@ package org.osflash.signals;
 
 /** The SlotList class represents an immutable list of Slot objects. */
 import haxe.Constraints.Function;
+import openfl.errors.Error;
 
 @:final class SlotList {
     /** Represents an empty list. Used as the list terminator. */
@@ -16,14 +17,14 @@ import haxe.Constraints.Function;
     public function new(head : ISlot, tail : SlotList = null) {
         if (head == null && tail == null) {
             if (NIL != null) {
-                throw new js.lib.Error("Parameters head and tail are null. Use the NIL element instead.");
+                throw new Error("Parameters head and tail are null. Use the NIL element instead.");
             }
 
             /** this is the NIL element as per definition */
             nonEmpty = false;
         }
         else if (head == null) {
-            throw new js.lib.Error("Parameter head cannot be null.");
+            throw new Error("Parameter head cannot be null.");
         }
         else {
             this.head = head;

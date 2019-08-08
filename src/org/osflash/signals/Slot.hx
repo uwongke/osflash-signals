@@ -1,6 +1,7 @@
 package org.osflash.signals;
 
 import haxe.Constraints.Function;
+import openfl.errors.Error;
 
 /** The Slot class represents a signal slot. */
 class Slot implements ISlot {
@@ -28,7 +29,7 @@ class Slot implements ISlot {
 
     public function set_listener(value : Function) : Function {
         if (null == value) {
-            throw new js.lib.Error(
+            throw new Error(
             "Given listener is null.\nDid you want to set enabled to false instead?");
         }
 
@@ -139,11 +140,11 @@ class Slot implements ISlot {
 
     private function verifyListener(listener : Function) : Void {
         if (null == listener) {
-            throw new js.lib.Error("Given listener is null.");
+            throw new Error("Given listener is null.");
         }
 
         if (null == _signal) {
-            throw new js.lib.Error("Internal signal reference has not been set yet.");
+            throw new Error("Internal signal reference has not been set yet.");
         }
     }
 }
