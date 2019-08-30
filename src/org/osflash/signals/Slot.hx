@@ -58,7 +58,6 @@ class Slot implements ISlot {
     }
 
     public function set_params(value : Array<Dynamic>) : Array<Dynamic> {
-        //trace(value);
         if(value.length > 1){
             _params = new Array<Dynamic>();
             for (i in 0...value.length) {
