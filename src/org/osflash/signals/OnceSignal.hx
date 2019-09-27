@@ -3,6 +3,8 @@ package org.osflash.signals;
 import haxe.Constraints.Function;
 import openfl.errors.Error;
 
+using Std;
+
 /** Allows the valueClasses to be set in MXML */
 @:meta(DefaultProperty(name="valueClasses"))
 class OnceSignal implements IOnceSignal {
@@ -65,6 +67,13 @@ class OnceSignal implements IOnceSignal {
     public function dispatch(valueObjects : Array<Dynamic> = null) : Void{
         if(valueObjects == null){
             valueObjects = new Array<Dynamic>();
+        }
+
+        if (!valueObjects.is(Array)) {
+            throw "Caller to dispatch() passed a non-array element.  \n" +
+                  "If this is called via Reflect.callMethod(...), then the \n" +
+                  "arguments must be wrapped in an array (e.g. [args]).\n" +
+                  'Argument recieved was [$valueObjects]';
         }
 
         var numValueClasses : Int = _valueClasses.length;
