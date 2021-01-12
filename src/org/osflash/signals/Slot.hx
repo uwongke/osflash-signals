@@ -75,7 +75,7 @@ class Slot implements ISlot {
             remove();
         }
         if (_params != null && _params.length !=0) {
-            Reflect.callMethod(null, _listener, _params);
+            Reflect2.callMethod(null, _listener, _params);
             return;
         }
         _listener();
@@ -89,7 +89,7 @@ class Slot implements ISlot {
             remove();
         }
         if (_params != null && _params.length !=0) {
-            Reflect.callMethod(null, _listener, [value].concat(_params));
+            Reflect2.callMethod(null, _listener, [value].concat(_params));
             return;
         }
         _listener(value);
@@ -124,7 +124,7 @@ class Slot implements ISlot {
             _listener(valueObjects[0], valueObjects[1], valueObjects[2]);
         }
         else {
-            Reflect.callMethod(null, _listener, valueObjects);
+            Reflect2.callMethod(null, _listener, valueObjects);
         }
     }
 

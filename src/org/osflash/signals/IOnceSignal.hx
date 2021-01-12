@@ -14,7 +14,7 @@ interface IOnceSignal {
     public function get_numListeners(): Int;
 
     /** Subscribes a one-time listener for this signal. */
-    function addOnce(listener: Function): ISlot;
+    function addOnce(listener:Function, id:String = null): ISlot;
 
     /** Dispatches an object to listeners. */
     function dispatch(valueObjects: Array<Dynamic> = null) : Void;

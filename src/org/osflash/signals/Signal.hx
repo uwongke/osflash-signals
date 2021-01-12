@@ -28,6 +28,8 @@ class Signal extends OnceSignal implements ISignal {
     }
 
     public function add(listener : Function) : ISlot{
+        id = Std.string(listener);
+        trace("rick adding listener: " + id);
         return registerListener(listener);
     }
 }
