@@ -11,7 +11,6 @@ class OnceSignal implements IOnceSignal {
 
     private var _valueClasses : Array<Dynamic>;  /** of Class */
     private var slots : SlotList = SlotList.NIL;
-    private var id:String = "";
 
     /** Creates a Signal instance to dispatch value objects. */
     public function new(valueClasses : Array<Dynamic> = null){
@@ -46,15 +45,8 @@ class OnceSignal implements IOnceSignal {
         return slots.length;
     }
 
-    public function addOnce(listener:Function, id:String = null) : ISlot{
-        this.id = id;
-        if (id == "sceneReady") {
-            trace("rick adding listener sceneReady");
-        } else {
-            id = Std.string(listener);
-            trace("rick adding listener: " + id);
-        }
-        return registerListener(listener, true);
+    public function addOnce(listener:Function) : ISlot{
+         return registerListener(listener, true);
     }
 
     public function remove(listener : Function) : ISlot{
@@ -73,11 +65,6 @@ class OnceSignal implements IOnceSignal {
 
     /** If valueClasses is empty, value objects are not type-checked. */
     public function dispatch(valueObjects : Array<Dynamic> = null) : Void{
-        if (id == "sceneReady") {
-            trace("rick dispatching sceneReady");
-        } else {
-            trace("rick dispatching other: " + id);
-        }
         if(valueObjects == null){
             valueObjects = new Array<Dynamic>();
         }
@@ -114,7 +101,6 @@ class OnceSignal implements IOnceSignal {
         var slotsToProcess : SlotList = slots;
         if (slotsToProcess.nonEmpty){
             while (slotsToProcess.nonEmpty){
-                trace("rick executing " + slotsToProcess.head.get_listener());
                 slotsToProcess.head.execute(valueObjects);
                 slotsToProcess = slotsToProcess.tail;
             }
@@ -125,9 +111,6 @@ class OnceSignal implements IOnceSignal {
         if (registrationPossible(listener, once)){
             var newSlot : ISlot = new Slot(listener, this, once);
             slots = slots.prepend(newSlot);
-            if (id == "sceneReady") {
-                trace("rick registering listener sceneReady");
-            }
             return newSlot;
         }
 
