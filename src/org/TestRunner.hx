@@ -6,16 +6,16 @@ import test.org.osflash.signals.SlotListTest;
 import test.org.osflash.signals.events.GenericEventTest;
 
 class TestRunner {
-    var r = new haxe.unit.TestRunner();
+	var r = new haxe.unit.TestRunner();
 
-    public function new() {
-        /** Add Test Cases here.... */
-        //r.add(new GenericEventTest());
-        //r.add(new SlotListTest());
-        //r.add(new SlotTest());
-        //r.add(new SignalTest());
+	public function new() {
+		/** Add Test Cases here.... */
+		//r.add(new GenericEventTest());
+		//r.add(new SlotListTest());
+		//r.add(new SlotTest());
+		//r.add(new SignalTest());
 
-        /** Run the tests*/
-        //r.run();
-    }
+		/** Run the tests*/
+		//r.run();
+	}
 }

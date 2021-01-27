@@ -4,11 +4,11 @@ package test;
 
 /** TestCase Boilerplate */
 class MyTestCase extends haxe.unit.TestCase {
-    override public function setup() {
+	override public function setup() {
 
-    }
+	}
 
-    override public function tearDown() {
+	override public function tearDown() {
 
-    }
+	}
 }
